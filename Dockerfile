@@ -8,8 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN cp .env.example .env
-
 EXPOSE 8000
 
 
