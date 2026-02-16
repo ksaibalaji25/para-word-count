@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Para Word Count">
+  <title>{{title}}</title>
+  
+  <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
+
+  {% if messages %}
+  <script>
+    {% for message in messages %}
+    alert("{{ message }}");
+    {% endfor %}
+  </script>
+  {% endif %}
+
+</head>
+
+<body>
+
+  <nav>
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+      <a href="{% url "index" %}" class="navbar-brand">Para Word Count</a>
+      <ul style="display: flex; list-style: none; gap: 0; margin: 0;">
+        <li><a href="{% url "index" %}">Home</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url "logout" %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url "register" %}">Sign up</a></li>
+        <li><a href="{% url "login" %}">Log in</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  {% block start %}
+  {% if user.is_authenticated %}
+  <h1>Welcome back, {{user.username}}!</h1>
+  {% else %}
+  <h1>Please log in</h1>
+  {% endif %}
+  {% endblock %}
+
+</body>
+
+</html>
